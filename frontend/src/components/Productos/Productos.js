@@ -1,7 +1,12 @@
-const Productos= () => {
+import CardList from '../CardList/CardList';
+import Categorias from '../Categorias/Categorias';
+import './Productos.css';
+
+const Productos = ({ cards }) => {
     return (
-        <div>
-            <h1>Productos</h1>
+        <div className="bg">
+            <Categorias />
+            <CardList cards={cards}/>
         </div>
     )
 }
