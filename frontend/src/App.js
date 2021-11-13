@@ -5,10 +5,12 @@ import Header from './components/Header/Header';
 import Inicio from './components/Inicio/Inicio';
 import Categorias from './components/Categorias/Categorias';
 import Productos from './components/Productos/Productos';
+import PaginaProducto from './components/PaginaProducto/PaginaProducto';
 import Contacto from './components/Contacto/Contacto'
+import Login from './components/Login/Login';
 import Admin from './components/Admin/Admin';
 
-import {cards1} from './cards';
+import { cards1 } from './cards';
 
 class App extends Component {
   constructor() {
@@ -21,7 +23,7 @@ class App extends Component {
 
   onSearchfieldChange = (event) => {
     console.log(event.target.value)
-    this.setState({searchfield: event.target.value})
+    this.setState({ searchfield: event.target.value })
   }
 
   render() {
@@ -32,16 +34,19 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Header searchChange={this.onSearchfieldChange}/>
+          <Header searchChange={this.onSearchfieldChange} />
         </div>
         <Routes>
-          <Route path="/" element={<Inicio />} exact />
-          <Route path="/categorias" element={<Categorias />} />
-          <Route path="/productos" element={<Productos cards={filteredCards} />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/pagina-producto/:id" element={<Productos />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/" exact element={<Inicio />} />
+          <Route path="/categorias" exact element={<Categorias />} />
+          <Route path="/productos" exact element={<Productos cards={filteredCards} />} />
+          <Route path="/contacto" exact element={<Contacto />} />
+          <Route path="/pagina-producto/:id" exact element={<PaginaProducto />} />
+
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/admin" exact element={<Admin />} />
         </Routes>
+
       </BrowserRouter>
     );
   }
