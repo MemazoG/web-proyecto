@@ -8,7 +8,10 @@ import Productos from './components/Productos/Productos';
 import PaginaProducto from './components/PaginaProducto/PaginaProducto';
 import Contacto from './components/Contacto/Contacto'
 import Login from './components/Login/Login';
-import Admin from './components/Admin/Admin';
+import DashboardAdmin from './components/DashboardAdmin/DashboardAdmin';
+import EditarProducto from './components/EditarProducto/EditarProducto';
+import EliminarProducto from './components/EliminarProducto/EliminarProducto';
+import AgregarProducto from './components/AgregarProducto/AgregarProducto';
 
 import { cards1 } from './cards';
 
@@ -44,7 +47,10 @@ class App extends Component {
           <Route path="/pagina-producto/:id" exact element={<PaginaProducto />} />
 
           <Route path="/login" exact element={<Login />} />
-          <Route path="/admin" exact element={<Admin />} />
+          <Route path="/dashboard" exact element={<DashboardAdmin cards={filteredCards} />} />
+          <Route path="/editar-producto/:id" exact element={<EditarProducto />} />
+          <Route path="/eliminar-producto/:id" exact element={<EliminarProducto />} />
+          <Route path="/agregar-producto" exact element={<AgregarProducto />} />
         </Routes>
 
       </BrowserRouter>
