@@ -9,7 +9,7 @@ const Inicio = () => {
             <section className="center w-80 tc">
 
                 {/* SECCIÓN     -   SWEET ICE*/}
-                <article className="pv4 bt bb b--black-10 ph3 ph0-l">
+                <article className="pv4 ph3 ph0-l">
                     <div className="w-100 pr3-ns order-2 order-1-ns">
                         <h1 className="f2 mt0 lh-title ttu">Sweet Ice</h1>
                         <h1 className="f4 mt0 lh-title ttu">Auténticos helados mexicanos</h1>
