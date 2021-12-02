@@ -53,7 +53,7 @@ class App extends Component {
 
           <Route path="/login" exact element={<Login />} />
           <Route path="/dashboard" exact element={<DashboardAdmin cards={filteredProducts} />} />
-          <Route path="/editar-producto/:id" exact element={<EditarProducto product={filteredProducts[0]} />} />
+          <Route path="/editar-producto/:id" exact element={<EditarProducto />} />
           <Route path="/eliminar-producto/:id" exact element={<EliminarProducto />} />
           <Route path="/agregar-producto" exact element={<AgregarProducto />} />
         </Routes>
