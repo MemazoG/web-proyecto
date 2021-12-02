@@ -9,10 +9,25 @@ const AdminCardList = ({ cards }) => {
                 <Card
                     name={cards[i].name}
                     category={cards[i].category}
+                    key={cards[i]._id}
+                    prodID={cards[i]._id}
                 />
                 <div>
-                    <Link className="f4 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg w-40" to="/">Editar</Link>
-                    <Link className="f4 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg w-40" to="/">Borrar</Link>
+                    <Link className="f4 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg w-40" 
+                        to={{
+                            pathname: `/editar-producto/${cards[i]._id}`,
+                            id: {productID: cards[i]._id},
+                        }}>
+                        Editar
+                    </Link>
+                    
+                    <Link className="f4 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg w-40" 
+                        to={{
+                            pathname: `/eliminar-producto/${cards[i]._id}`,
+                            id: {productID: cards[i]._id},
+                        }}>
+                        Borrar
+                    </Link>
                 </div>
             </div>
         );

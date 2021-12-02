@@ -1,11 +1,12 @@
 import { React, Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class AgregarProducto extends Component {
     constructor() {
         super();
         this.state = {
             name: '',
-            category: '',
+            category: 'De Agua',
             description: '',
             price: '',
             image: null
@@ -14,40 +15,60 @@ class AgregarProducto extends Component {
 
     //Cambia el state del nombre
     onNameChange = (event) => {
-        this.setState({name: event.target.value})
+        this.setState({ name: event.target.value })
         console.log(event.target.value)
     }
 
     //Cambia el state de la categoría
     onCategoryChange = (event) => {
-        this.setState({category: event.target.value})
+        this.setState({ category: event.target.value })
         console.log(event.target.value)
     }
 
     //Cambia el state de la descripción
     onDescriptionChange = (event) => {
-        this.setState({description: event.target.value})
+        this.setState({ description: event.target.value })
         console.log(event.target.value)
     }
 
     //Cambia el state del precio
     onPriceChange = (event) => {
-        this.setState({price: event.target.value})
+        this.setState({ price: event.target.value })
         console.log(event.target.value)
     }
 
     //Cambia el state del archivo de imagen
     onFileSelect = (event) => {
-        this.setState({image: event.target.files[0]})
+        this.setState({ image: event.target.files[0] })
         console.log(event.target.files[0])
     }
 
     //Se ejecuta cuando se le da click al botón de AGREGAR
     onAddClick = () => {
-        console.log("click")
-        //fetch a /add con POST
 
-        //cambiar a pantalla de DASHBOARD
+        //Revisa los campos, si hay uno vacío, manda alerta y no hace nada más
+        if (this.state.name === '' || this.state.description === '' || this.state.price === '') {
+            alert("Para agregar un producto, debe llenar todos los campos")
+        } else {
+            fetch("http://localhost:9000/api/admin/newProduct", {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    category: this.state.category,
+                    description: this.state.description,
+                    price: this.state.price
+                })
+            })
+                .then(response => response.json())
+                .then(producto => {
+                    if (producto) {
+                        alert("Producto agregado exitosamente")
+                    }
+                })
+        }
+
+        //fetch a /newProduct con POST
     }
 
 
@@ -65,10 +86,10 @@ class AgregarProducto extends Component {
                     <div className="measure">
                         <label htmlFor="category" className="f5 b db mb2">Categoría</label>
                         <select onChange={this.onCategoryChange} id="category" className="ba b--black-20 pa2 mb2 db w-100">
-                            <option value="de-agua">De Agua</option>
-                            <option value="de-leche">De Leche</option>
-                            <option value="premium">Premium</option>
-                            <option value="paletas">Paletas</option>
+                            <option value="De Agua">De Agua</option>
+                            <option value="De Leche">De Leche</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Paletas">Paletas</option>
                         </select>
                     </div>
                     <br />
@@ -91,9 +112,17 @@ class AgregarProducto extends Component {
                     </div>
                     <br />
 
-                    {/* SUBMIT BUTTON */}
-                    <div className="tc">
-                        <button onClick={this.onAddClick} className="f3 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg">Agregar producto</button>
+                    <div className="flex">
+                        {/* BACK BUTTON */}
+                        <div className="tc">
+                            <Link to="/dashboard">
+                                <button className="f3 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg">Regresar</button>
+                            </Link>
+                        </div>
+                        {/* SUBMIT BUTTON */}
+                        <div className="tc">
+                            <button onClick={this.onAddClick} className="f3 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg">Agregar producto</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { React, Component, useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Apple from './apple.png';
 import './PaginaProducto.css';
@@ -27,15 +27,20 @@ function PaginaProducto() {
     return (
         <div className="flex justify-center w-100">
             <div className="ba b--white bw2 w-30 tc">
+                {/* IMAGEN */}
                 <img className="img" alt="product" src={Apple} />
             </div>
 
             <div className="ba b--yellow bw2 w-50">
+                {/* NOMBRE */}
                 <h1>{product.name}</h1>
                 <div className="flex inline-flex ml2">
+                    {/* PRECIO */}
                     <p className="ma0 w-50">{product.price}</p>
+                    {/* CATEGORÍA */}
                     <p className="ma0 w-50 i">{product.category}</p>
                 </div>
+                {/* DESCRIPCIÓN */}
                 <p>{product.description}</p>
             </div>
         </div>
