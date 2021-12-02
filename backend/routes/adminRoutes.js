@@ -6,10 +6,11 @@ const verify = require("../middleware/verifyAccess")
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
 
-router.get('/', verify, async function (req, res){
+router.get('/', async function (req, res){
     var products = await Product.find()
     console.log(products)
-    //res.send(admins)
+    console.log("HIHIH")
+    res.send(products)
 })
 
 router.post('/login', async function(req, res){
@@ -35,14 +36,14 @@ router.post('/login', async function(req, res){
     }
 })
 
-router.post('/newProduct', async function(req, res){
+router.post('/newProduct', verify, async function(req, res){
     console.log(req.body)
     var product = new Product(req.body);
     await product.save()
     res.send(product);
 })
 
-router.get('/editProduct/:id', async function (req, res){
+router.get('/editProduct/:id', verify, async function (req, res){
     var product = await Product.findById(req.params.id)
     res.send(product)
 })

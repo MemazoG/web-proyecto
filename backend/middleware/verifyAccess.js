@@ -7,6 +7,7 @@ function verifyToken(req,res,next) {
     console.log(token)
 
     if (!token) {
+        console.log("NO TOKEN")
         return res.redirect('/login')
     }
     // Validar el token 
