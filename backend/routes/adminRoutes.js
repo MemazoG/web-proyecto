@@ -2,14 +2,41 @@ const express = require('express');
 const router = express.Router()
 const Product = require('../models/product')
 const Admin = require('../models/admin')
+const verify = require("../middleware/verifyAccess")
+const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken")
 
-router.get('/', async function (req, res){
-    var admins = await Admin.find()
-    console.log(admins)
-    res.send(admins)
+router.get('/', verify, async function (req, res){
+    var products = await Product.find()
+    console.log(products)
+    //res.send(admins)
+})
+
+router.post('/login', async function(req, res){
+    console.log(req.body)
+    var {username, password} = req.body
+
+    const admin = await Admin.findOne({username: username})
+
+    if(!admin){
+        return res.status(404).send("Admin does not exist")
+    }else{
+        const valid = await bcrypt.compare(password, user.password)
+    }
+
+    if(valid){
+        const token = jwt.sign({id:user.email, permission: true}, process.env.SECRET, {expiresIn: "2h"})
+        console.log(token)
+        res.cookie("token", token, {httpOnly:true})
+        res.status(200).send("Log in succesful")
+    }else{
+        console.log("Password is invalid")
+        res.status(400).send("Invalid password")
+    }
 })
 
 router.post('/newProduct', async function(req, res){
+    console.log(req.body)
     var product = new Product(req.body);
     await product.save()
     res.send(product);
