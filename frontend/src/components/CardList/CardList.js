@@ -6,6 +6,8 @@ const CardList = ({ cards }) => {
             <Card
                 name={cards[i].name}
                 category={cards[i].category}
+                key={cards[i]._id}
+                prodID={cards[i]._id}
             />
         );
     });

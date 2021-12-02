@@ -13,15 +13,20 @@ import EditarProducto from './components/EditarProducto/EditarProducto';
 import EliminarProducto from './components/EliminarProducto/EliminarProducto';
 import AgregarProducto from './components/AgregarProducto/AgregarProducto';
 
-import { cards1 } from './cards';
-
 class App extends Component {
   constructor() {
     super();
     this.state = {
       searchfield: '',
-      cards: cards1
+      products: []
     }
+  }
+
+  //Se llama cuando se carga el componente, obtiene todos los registros de productos (SELECT *)
+  componentDidMount() {
+    fetch('http://localhost:9000/api/all')
+            .then(response => response.json())
+            .then(productList => { this.setState({products: productList})});
   }
 
   onSearchfieldChange = (event) => {
@@ -30,7 +35,7 @@ class App extends Component {
   }
 
   render() {
-    const filteredCards = this.state.cards.filter(c => {
+    const filteredProducts = this.state.products.filter(c => {
       return c.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
     })
 
@@ -42,12 +47,12 @@ class App extends Component {
         <Routes>
           <Route path="/" exact element={<Inicio />} />
           <Route path="/categorias" exact element={<Categorias />} />
-          <Route path="/productos" exact element={<Productos cards={filteredCards} />} />
+          <Route path="/productos" exact element={<Productos cards={filteredProducts} />} />
           <Route path="/contacto" exact element={<Contacto />} />
           <Route path="/pagina-producto/:id" exact element={<PaginaProducto />} />
 
           <Route path="/login" exact element={<Login />} />
-          <Route path="/dashboard" exact element={<DashboardAdmin cards={filteredCards} />} />
+          <Route path="/dashboard" exact element={<DashboardAdmin cards={filteredProducts} />} />
           <Route path="/editar-producto/:id" exact element={<EditarProducto />} />
           <Route path="/eliminar-producto/:id" exact element={<EliminarProducto />} />
           <Route path="/agregar-producto" exact element={<AgregarProducto />} />
