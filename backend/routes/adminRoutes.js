@@ -61,7 +61,7 @@ router.get('/delProduct/:id', async function (req, res){
 router.post('/delProduct/:id', async function (req, res){
     var id = req.params.id
     await Product.remove({_id: id})
-    res.redirect('/')
+    res.redirect('/') 
 })
 
 module.exports = router;
