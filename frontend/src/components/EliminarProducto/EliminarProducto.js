@@ -24,6 +24,17 @@ function EliminarProducto() {
             .catch(err => console.log("Error, producto no encontrado", err))
     }, []);
 
+    const onButtonClick = () => {
+        //Fetch a /api/admin/delProduct/:id con POST
+        fetch(`http://localhost:9000/api/admin/delProduct/${id}`, {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+            })
+                .then(response => {
+                    alert("Producto eliminado")
+                })
+    }
+
     return (
         <div>
             <div className="flex justify-center w-100">
@@ -51,7 +62,11 @@ function EliminarProducto() {
                         <button className="f3 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg">Regresar</button>
                     </Link>
                 </div>
-                <button className="f3 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg">Eliminar</button>
+                <div>
+                    <Link onClick={onButtonClick} to="/dashboard">
+                        <button className="f3 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg">Eliminar</button>
+                    </Link>
+                </div>
             </div>
         </div>
     )
