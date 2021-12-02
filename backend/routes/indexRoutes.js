@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router()
 const Product = require('../models/product')
 const Admin = require('../models/admin')
-// const verify = require("../middleware/verifyAccess")
-// const bcrypt = require('bcrypt')
-// const jwt = require("jsonwebtoken")
-
-
 
 router.get('/all', async function(req, res){
     var products = await Product.find()
