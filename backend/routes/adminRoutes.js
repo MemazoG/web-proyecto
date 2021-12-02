@@ -6,7 +6,9 @@ const verify = require("../middleware/verifyAccess")
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
 
-router.get('/', async function (req, res){
+SECRET = process.env.SECRET || "mySweetSecret"
+
+router.get('/all', async function (req, res){
     var products = await Product.find()
     console.log(products)
     console.log("HIHIH")
