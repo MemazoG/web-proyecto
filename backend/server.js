@@ -3,6 +3,7 @@ var morgan = require("morgan");
 var mongoose = require('mongoose');
 var dotenv = require("dotenv");
 const cookieParser = require('cookie-parser');
+const cors = require("cors");
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ mongoose.connect(process.env.MONGO_URI)
 // })
 // Middleware
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(cors());
 // app.set('view engine', 'ejs')
 
 app.use(express.static('public'))

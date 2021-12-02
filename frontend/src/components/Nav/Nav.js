@@ -6,9 +6,6 @@ const Nav = () => {
             <Link to="/" className="f6 f5-l link bg-animate black-80 hover-bg-washed-yellow dib pa1 ph4-l w-100">
                 <p>Inicio</p>
             </Link>
-            <Link to="/categorias" className="f6 f5-l link bg-animate black-80 hover-bg-washed-green dib pa1 ph4-l w-100">
-                <p>Categorías</p>
-            </Link>
             <Link to="/productos" className="f6 f5-l link bg-animate black-80 hover-bg-washed-yellow dib pa1 ph4-l w-100">
                 <p>Productos</p>
             </Link>
