@@ -50,7 +50,7 @@ router.get('/editProduct/:id', async function (req, res){
 router.post('/editProduct/:id', async function (req, res){
     var id = req.params.id
     await Product.updateOne({_id: id}, req.body)
-    res.redirect('/');
+    res.status(200).json("Edit operation successful")
 })
 
 router.get('/delProduct/:id', async function (req, res){
@@ -61,7 +61,7 @@ router.get('/delProduct/:id', async function (req, res){
 router.post('/delProduct/:id', async function (req, res){
     var id = req.params.id
     await Product.remove({_id: id})
-    res.redirect('/')
+    res.status(200).json("Delete operation successful")
 })
 
 module.exports = router;
