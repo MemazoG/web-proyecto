@@ -9,10 +9,19 @@ router.get('/all', async function(req, res){
     res.send(products)
 })
 
-router.get('/:cat', async function(req, res){
+router.get('/products/:cat', async function(req, res){
     var products = await Product.find({category: req.params.cat})
     console.log(products)
     res.send(products)
 })
+
+router.get('/:id', async function(req, res){
+    var product = await Product.find({_id: req.params.id})
+    console.log(product)
+    res.send(product)
+})
+// const adminRoutes = require('./adminroutes');
+
+// app.use('/admin', adminRoutes)
 
 module.exports = router;

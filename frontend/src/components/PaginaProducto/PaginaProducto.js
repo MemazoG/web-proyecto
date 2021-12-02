@@ -1,7 +1,29 @@
+import { React, Component, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import Apple from './apple.png';
 import './PaginaProducto.css';
 
-const PaginaProducto = () => {
+function PaginaProducto() {
+    const emptyProduct = {
+        name: "",
+        category: "",
+        price: "",
+        description: "",
+        image: null
+    }
+    const { id } = useParams();
+    let [product, setProduct] = useState(emptyProduct);
+
+    useEffect(() => {
+        fetch(`http://localhost:9000/api/${id}`)
+            .then(res => res.json())
+            .then(response => {
+                setProduct(product = response[0])
+                console.log(product)
+            })
+            .catch(err => console.log("Error, producto no encontrado", err))
+    }, []);
+
     return (
         <div className="flex justify-center w-100">
             <div className="ba b--white bw2 w-30 tc">
@@ -9,12 +31,12 @@ const PaginaProducto = () => {
             </div>
 
             <div className="ba b--yellow bw2 w-50">
-                <h1>Nombre Producto</h1>
+                <h1>{product.name}</h1>
                 <div className="flex inline-flex ml2">
-                    <p className="ma0 w-50">Precio</p>
-                    <p className="ma0 w-50 i">Categoría</p>
+                    <p className="ma0 w-50">{product.price}</p>
+                    <p className="ma0 w-50 i">{product.category}</p>
                 </div>
-                <p>Descripción</p>
+                <p>{product.description}</p>
             </div>
         </div>
     )
