@@ -37,17 +37,17 @@ router.post('/login', async function(req, res){
     const admin = await Admin.findOne({username: username})
 
     if(!admin){
-        return res.status(404).send("Admin does not exist")
+        return res.status(404).json("Admin does not exist")
     }else{
         const valid = await bcrypt.compare(password, admin.password)
         if(valid){
             const token = jwt.sign({id:admin.email, permission: true}, process.env.SECRET, {expiresIn: "2h"})
             console.log(token)
             res.cookie("token", token, {httpOnly:true})
-            res.status(200).send("Log in succesful")
+            res.json(admin)
         }else{
             console.log("Password is invalid")
-            res.status(400).send("Invalid password")
+            res.status(400).json("Invalid password")
         }
     }
 
@@ -56,7 +56,7 @@ router.post('/login', async function(req, res){
 
 router.post('/logout', verify, async function(req, res){
     res.clearCookie("token")
-    res.status(200).send("Logout")
+    res.status(200).json("Logout")
 })
 
 router.post('/newProduct', verify, async function(req, res){
