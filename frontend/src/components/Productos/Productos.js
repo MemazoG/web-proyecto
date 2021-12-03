@@ -5,7 +5,7 @@ import './Productos.css';
 const Productos = ({ cards }) => {
     return (
         <div className="bg">
-            <Categorias />
+            {/*<Categorias />*/}
             <CardList cards={cards}/>
         </div>
     )
