@@ -6,7 +6,7 @@ const DashboardAdmin = ({ cards }) => {
         fetch(`http://localhost:9000/api/admin/logout`, {
             method: "post",
             headers: { "Content-Type": "application/json" },
-            //credentials: "include",
+            credentials: "include",
         })
             .then(response => response.json())
             .then(res => {

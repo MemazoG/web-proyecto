@@ -21,7 +21,7 @@ function Login() {
         fetch(`http://localhost:9000/api/admin/login`, {
             method: "post",
             headers: { "Content-Type": "application/json" },
-            //credentials: "include",
+            credentials: "include",
             body: JSON.stringify({
                 username: email,
                 password: password
