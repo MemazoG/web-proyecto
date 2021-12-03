@@ -5,7 +5,7 @@ import Card from '../Card/Card';
 const AdminCardList = ({ cards }) => {
     const cardsArray = cards.map((user, i) => {
         return (
-            <div className="tc">
+            <div className="tc" key={cards[i]._id}>
                 <Card
                     name={cards[i].name}
                     category={cards[i].category}

@@ -45,15 +45,15 @@ function EliminarProducto() {
 
                 <div className="ba b--yellow bw2 w-50">
                     {/* NOMBRE */}
-                    <h1>{product.name}</h1>
-                    <div className="flex inline-flex ml2">
+                    <h1 className="f1">{product.name}</h1>
+                    <div className="f3 flex inline-flex ml2 ba b--white bw2 w-30">
                         {/* PRECIO */}
                         <p className="ma0 w-50">{product.price}</p>
                         {/* CATEGORÍA */}
                         <p className="ma0 w-50 i">{product.category}</p>
                     </div>
                     {/* DESCRIPCIÓN */}
-                    <p>{product.description}</p>
+                    <p className="f3">{product.description}</p>
                 </div>
             </div>
             <div className="tc flex justify-center">
