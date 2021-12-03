@@ -40,6 +40,10 @@ const adminRoutes = require('./routes/adminRoutes');
 app.use('/api', indexRoutes);
 app.use('/api/admin', adminRoutes);
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('../frontend/build'))
+}
+
 app.listen(process.env.PORT,() =>{
     console.log(`Server running on port  ${process.env.PORT}`) 
 } )
