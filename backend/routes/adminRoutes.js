@@ -37,12 +37,12 @@ router.post('/login', async function(req, res){
     const admin = await Admin.findOne({username: username})
 
     if(!admin){
-        return res.status(404).json("Admin does not exist")
+        res.status(404).json("Admin does not exist")
     }else{
         const valid = await bcrypt.compare(password, admin.password)
         if(valid){
             const token = jwt.sign({id:admin.email, permission: true}, process.env.SECRET, {expiresIn: "2h"})
-            console.log(token)
+            console.log("TOKEN", token)
             res.cookie("token", token, {httpOnly:true})
             res.json(admin)
         }else{

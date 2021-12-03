@@ -1,18 +1,12 @@
 import { Link } from "react-router-dom";
 import AdminCardList from "../AdminCardList/AdminCardList";
+import useAuth from '../../auth/useAuth';
 
 const DashboardAdmin = ({ cards }) => {
+    const auth = useAuth();
+
     const handleLogout = () => {
-        fetch(`http://localhost:9000/api/admin/logout`, {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            //credentials: "include",
-        })
-            .then(response => response.json())
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log("ERROR", err))
+        auth.logout();
     }
 
     return (
