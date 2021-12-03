@@ -20,13 +20,14 @@ router.get('/admins', async function (req, res){
     res.send(admins)
 })
 
-router.post('/newAdmin', async function (req, res){
+router.post('/newAdmin', verify, async function (req, res){
     console.log(req.body)
     var newAdmin = new Admin(req.body)
     newAdmin.password = await bcrypt.hashSync(newAdmin.password, 10)
     console.log(newAdmin)
     await newAdmin.save()
-    res.send(newAdmin)
+    .then(() => res.status(200).json('New admin!'))
+    .catch(err => res.status(400).json({error: 'Admin already exists with that email'}))
 })
 
 router.post('/login', async function(req, res){
@@ -53,11 +54,17 @@ router.post('/login', async function(req, res){
     
 })
 
+router.post('/logout', async function(req, res){
+    res.clearCookie("token")
+    res.status(200).send("Logout")
+})
+
 router.post('/newProduct', verify, async function(req, res){
     console.log(req.body)
     var product = new Product(req.body);
     await product.save()
-    res.send(product);
+    .then(() => res.status(200).json('Product added'))
+    .catch(err => res.status(400).json(err))
 })
 
 router.get('/editProduct/:id', verify, async function (req, res){
@@ -68,7 +75,8 @@ router.get('/editProduct/:id', verify, async function (req, res){
 router.post('/editProduct/:id', verify, async function (req, res){
     var id = req.params.id
     await Product.updateOne({_id: id}, req.body)
-    res.status(200).json("Edit operation successful")
+    .then(() => res.status(200).json('Product edited'))
+    .catch(err => res.status(400).json(err))
 })
 
 router.get('/delProduct/:id', verify, async function (req, res){
@@ -76,10 +84,11 @@ router.get('/delProduct/:id', verify, async function (req, res){
     res.send(product)
 })
 
-router.post('/delProduct/:id', async function (req, res){
+router.post('/delProduct/:id', verify, async function (req, res){
     var id = req.params.id
     await Product.remove({_id: id})
-    res.status(200).json("Delete operation successful")
+    .then(() => res.status(200).json('Product deleted'))
+    .catch(err => res.status(400).json(err))
 })
 
 module.exports = router;
