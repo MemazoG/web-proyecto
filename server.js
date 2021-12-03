@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var dotenv = require("dotenv");
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
+const path = require('path');
 
 dotenv.config();
 
@@ -40,9 +41,13 @@ const adminRoutes = require('./routes/adminRoutes');
 app.use('/api', indexRoutes);
 app.use('/api/admin', adminRoutes);
 
-if(process.env.NODE_ENV === 'production'){
+//if(process.env.NODE_ENV === 'production'){
     app.use(express.static('frontend/build'))
-}
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    });
+//}
 
 app.listen(process.env.PORT,() =>{
     console.log(`Server running on port  ${process.env.PORT}`) 
