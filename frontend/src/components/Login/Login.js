@@ -1,8 +1,10 @@
 import { React, Component, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 function Login() {
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+    let [redirect, setRedirect] = useState(false);
 
     const onEmailChange = (event) => {
         setEmail(email = event.target.value)
@@ -19,18 +21,29 @@ function Login() {
         fetch(`http://localhost:9000/api/admin/login`, {
             method: "post",
             headers: { "Content-Type": "application/json" },
+            //credentials: "include",
             body: JSON.stringify({
                 username: email,
                 password: password
             })
         })
             .then(response => response.json())
-            .then(res => {
-                console.log(res)
+            .then(admin => {
+                console.log(admin)
+                if(admin.username) {
+                    setRedirect(true)
+                } else {
+                    alert("Error, credenciales inválidas")
+                }
             })
-            .catch(err => console.log("ERROR", err))
+            .catch(err => {
+                console.log("ERROR", err)
+            })
+    }
 
-        //cargar página de administrador (CRUD)
+    if(redirect) {
+        console.log("True")
+        return <Navigate to="/dashboard" />
     }
 
     return (
