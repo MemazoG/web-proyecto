@@ -1,7 +1,9 @@
-import { React, Component, useState } from 'react';
+import { React, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import useAuth from '../../auth/useAuth';
 
 function Login() {
+    const auth = useAuth();
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
     let [redirect, setRedirect] = useState(false);
@@ -16,33 +18,15 @@ function Login() {
         console.log(password)
     }
 
-    const onLoginClick = () => {
-        //fetch a /login con POST
-        fetch(`http://localhost:9000/api/admin/login`, {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            //credentials: "include",
-            body: JSON.stringify({
-                username: email,
-                password: password
-            })
-        })
-            .then(response => response.json())
-            .then(admin => {
-                console.log(admin)
-                if(admin.username) {
-                    setRedirect(true)
-                } else {
-                    alert("Error, credenciales inválidas")
-                }
-            })
-            .catch(err => {
-                console.log("ERROR", err)
-            })
+    const onLoginClick = async () => {
+        //login va a poner en el estado de usuario un null si no se pudo hacer login o el id del usuario si si se pudo
+        await auth.login(email, password)
+        //isLogged nos dice si hay usuario o no
+        const allow = auth.isLogged()
+        allow ? setRedirect(true) : alert("Credenciales inválidas")
     }
 
     if(redirect) {
-        console.log("True")
         return <Navigate to="/dashboard" />
     }
 
