@@ -25,7 +25,7 @@ class App extends Component {
 
   //Se llama cuando se carga el componente, obtiene todos los registros de productos (SELECT *)
   componentDidMount() {
-    fetch('http://localhost:9000/api/all')
+    fetch('/api/all')
             .then(response => response.json())
             .then(productList => { this.setState({products: productList})});
   }
