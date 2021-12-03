@@ -4,7 +4,7 @@ import './Card.css';
 
 
 
-const Card = ({ name, category, prodID }) => {
+const Card = ({ name, category, prodID, image }) => {
 
     return (
         <Link 
@@ -14,7 +14,7 @@ const Card = ({ name, category, prodID }) => {
                 }} 
             className="tc logo-green-bg dib flex-wrap br3 pa3 ma2 grow bw2 shadow-5 pointer card" 
             style={{ textDecoration: 'none' }}>
-                <img className="img" alt="product" src={Apple}/>
+                <img className="img" alt="product" src={image || Apple}/>
                 <div>
                     <h2 className="f4 black-90">{name}</h2>
                     <p className="f5 i black-90">{category}</p>

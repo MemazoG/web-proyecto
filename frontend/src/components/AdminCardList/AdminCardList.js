@@ -11,6 +11,7 @@ const AdminCardList = ({ cards }) => {
                     category={cards[i].category}
                     key={cards[i]._id}
                     prodID={cards[i]._id}
+                    image={cards[i].image}
                 />
                 <div>
                     <Link className="f4 grow no-underline br-pill ph3 pv2 ma2 dib black logo-green-bg w-40" 

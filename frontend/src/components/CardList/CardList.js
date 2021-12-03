@@ -8,6 +8,7 @@ const CardList = ({ cards }) => {
                 category={cards[i].category}
                 key={cards[i]._id}
                 prodID={cards[i]._id}
+                image={cards[i].image}
             />
         );
     });
