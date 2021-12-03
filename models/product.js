@@ -4,7 +4,8 @@ var ProductSchema = Schema ({
     name: {type: String}, 
     description: {type: String},
     price: {type: Number},
-    category: {type: String}
+    category: {type: String},
+    image: {type: String}
 })
 
 module.exports = model('products', ProductSchema)
