@@ -91,7 +91,7 @@ function EliminarProducto() {
     let [product, setProduct] = useState(emptyProduct);
 
     useEffect(() => {
-        fetch(`http://localhost:9000/api/${id}`)
+        fetch(`/api/${id}`)
             .then(res => res.json())
             .then(response => {
                 setProduct(product = response[0])
@@ -102,7 +102,7 @@ function EliminarProducto() {
 
     const onButtonClick = () => {
         //Fetch a /api/admin/delProduct/:id con POST
-        fetch(`http://localhost:9000/api/admin/delProduct/${id}`, {
+        fetch(`/api/admin/delProduct/${id}`, {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
             })

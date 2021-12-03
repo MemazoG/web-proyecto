@@ -50,7 +50,7 @@ class AgregarProducto extends Component {
         if (this.state.name === '' || this.state.description === '' || this.state.price === '') {
             alert("Para agregar un producto, debe llenar todos los campos")
         } else {
-            fetch("http://localhost:9000/api/admin/newProduct", {
+            fetch("/api/admin/newProduct", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

@@ -67,7 +67,7 @@ function PaginaProducto() {
     let [product, setProduct] = useState(emptyProduct);
 
     useEffect(() => {
-        fetch(`http://localhost:9000/api/${id}`)
+        fetch(`/api/${id}`)
             .then(res => res.json())
             .then(response => {
                 setProduct(product = response[0])

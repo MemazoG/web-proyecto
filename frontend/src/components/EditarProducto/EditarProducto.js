@@ -185,7 +185,7 @@ function EditarProducto() {
 
     //Se ejecuta 1 sola vez cuando se renderiza la página, hace el fetch para conseguir la info del producto a mostrar
     useEffect(() => {
-        fetch(`http://localhost:9000/api/${id}`)
+        fetch(`/api/${id}`)
             .then(res => res.json())
             .then(response => {
                 //Con setProduct se cambia el estado de product, que tiene toda la info del producto
@@ -266,7 +266,7 @@ function EditarProducto() {
         if (product.name === '' || product.description === '' || product.price === '') {
             alert("Asegúrese de que no queden campos en blanco para guardar los cambios")
         } else {
-            fetch(`http://localhost:9000/api/admin/editProduct/${id}`, {
+            fetch(`/api/admin/editProduct/${id}`, {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
