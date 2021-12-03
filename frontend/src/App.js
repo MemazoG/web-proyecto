@@ -12,6 +12,7 @@ import DashboardAdmin from './components/DashboardAdmin/DashboardAdmin';
 import EditarProducto from './components/EditarProducto/EditarProducto';
 import EliminarProducto from './components/EliminarProducto/EliminarProducto';
 import AgregarProducto from './components/AgregarProducto/AgregarProducto';
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
   constructor() {
@@ -52,10 +53,45 @@ class App extends Component {
           <Route path="/pagina-producto/:id" exact element={<PaginaProducto />} />
 
           <Route path="/login" exact element={<Login />} />
-          <Route path="/dashboard" exact element={<DashboardAdmin cards={filteredProducts} />} />
-          <Route path="/editar-producto/:id" exact element={<EditarProducto />} />
-          <Route path="/eliminar-producto/:id" exact element={<EliminarProducto />} />
-          <Route path="/agregar-producto" exact element={<AgregarProducto />} />
+
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <DashboardAdmin cards={filteredProducts} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editar-producto/:id"
+            element={
+              <PrivateRoute>
+                <EditarProducto />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/eliminar-producto/:id"
+            element={
+              <PrivateRoute>
+                <EliminarProducto />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/agregar-producto"
+            element={
+              <PrivateRoute>
+                <AgregarProducto />
+              </PrivateRoute>
+            }
+          />
+          {/*
+          <PrivateRoute path="/dashboard" exact element={<DashboardAdmin cards={filteredProducts} />} />
+          <PrivateRoute path="/editar-producto/:id" exact element={<EditarProducto />} />
+          <PrivateRoute path="/eliminar-producto/:id" exact element={<EliminarProducto />} />
+          <PrivateRoute path="/agregar-producto" exact element={<AgregarProducto />} />
+           */}
         </Routes>
 
       </BrowserRouter>
