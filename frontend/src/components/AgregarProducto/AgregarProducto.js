@@ -39,8 +39,8 @@ class AgregarProducto extends Component {
 
     //Cambia el state del archivo de imagen
     onFileSelect = (event) => {
-        this.setState({ image: event.target.files[0] })
-        console.log(event.target.files[0])
+        this.setState({ image: event.target.value })
+        console.log(event.target.value)
     }
 
     //Se ejecuta cuando se le da click al botón de AGREGAR
@@ -57,7 +57,8 @@ class AgregarProducto extends Component {
                     name: this.state.name,
                     category: this.state.category,
                     description: this.state.description,
-                    price: this.state.price
+                    price: this.state.price,
+                    image: this.state.image
                 })
             })
                 .then(response => response.json())
@@ -108,7 +109,7 @@ class AgregarProducto extends Component {
                     {/* IMAGEN  ID --> image */}
                     <div className="measure">
                         <label htmlFor="imagen" className="f5 b db mb2">Imagen</label>
-                        <input onChange={this.onFileSelect} id="image" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="file" />
+                        <input onChange={this.onFileSelect} id="image" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" />
                     </div>
                     <br />
 

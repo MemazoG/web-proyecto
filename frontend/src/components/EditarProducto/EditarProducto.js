@@ -80,8 +80,8 @@ function EditarProducto() {
 
     //Cambia el state del archivo de imagen
     const onFileSelect = (event) => {
-        //this.setState({ image: event.target.files[0] })
-        console.log(event.target.files[0])
+        this.setState({ image: event.target.value })
+        console.log(event.target.value)
     }
 
     //Se ejecuta cuando se le da click al botón de AGREGAR
@@ -98,7 +98,8 @@ function EditarProducto() {
                     name: product.name,
                     category: product.category,
                     description: product.description,
-                    price: product.price
+                    price: product.price,
+                    image: product.image
                 })
             })
                 .then(response => response.json())
@@ -144,7 +145,7 @@ function EditarProducto() {
                 {/* IMAGEN  ID --> image */}
                 <div className="measure">
                     <label htmlFor="imagen" className="f5 b db mb2">Imagen</label>
-                    <input onChange={onFileSelect} id="image" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="file" />
+                    <input onChange={onFileSelect} id="image" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" />
                 </div>
                 <br />
 
