@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
         //LLAMADO PARA HACER LOGIN
         login(email, password) {
             //Hacer fetch
-            fetch(`http://localhost:9000/api/admin/login`, {
+            fetch(`/api/admin/login`, {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 //credentials: "include",
@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
         //LLAMADO PARA HACER LOGOUT
         logout() {
             //Hacer fetch
-            fetch(`http://localhost:9000/api/admin/logout`, {
+            fetch(`/api/admin/logout`, {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 //credentials: "include",
