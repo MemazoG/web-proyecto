@@ -77,7 +77,6 @@ router.post('/editProduct/:id', verify, async function (req, res){
     await Product.updateOne({_id: id}, req.body)
     .then(() => res.status(200).json('Product edited'))
     .catch(err => res.status(400).json(err))
-    
 })
 
 router.get('/delProduct/:id', verify, async function (req, res){
