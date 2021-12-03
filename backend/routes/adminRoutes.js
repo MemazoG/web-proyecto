@@ -54,7 +54,7 @@ router.post('/login', async function(req, res){
     
 })
 
-router.post('/logout', async function(req, res){
+router.post('/logout', verify, async function(req, res){
     res.clearCookie("token")
     res.status(200).send("Logout")
 })
